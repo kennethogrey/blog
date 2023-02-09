@@ -2,7 +2,7 @@
     <div class="page-header">
         <div class="row align-items-center">
           <div class="col-auto">
-            <span class="avatar avatar-md" style="background-image: url(...)"></span>
+            <span class="avatar avatar-md" style="background-image: url({{$author->picture}})"></span>
           </div>
           <div class="col-md-6">
             <h2 class="page-title">{{ $author->name }}</h2>
@@ -17,12 +17,18 @@
             </div>
           </div>
           <div class="col-auto d-md-flex">
-            <a href="#" class="btn btn-primary">
-              <!-- Download SVG icon from http://tabler-icons.io/i/message -->
-              <!-- SVG icon code -->
-              Change Picture
-            </a>
+            <input type="file" name="file" id="changeAuthorProfileFile" class='d-none'>
+            <!-- Download SVG icon from http://tabler-icons.io/i/message -->
+            <!-- SVG icon code -->
+            <a href="#" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('changeAuthorProfileFile').click();">
+                Change Picture
+              </a>
           </div>
+          <script>
+            document.getElementById('changeAuthorProfileFile').addEventListener('change', function(event) {
+              this.dispatchEvent(new InputEvent('input'));
+            });
+          </script>
         </div>
     </div>
 </div>

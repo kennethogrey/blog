@@ -11,7 +11,9 @@
     <link href="./back/dist/css/tabler.min.css" rel="stylesheet"/>
     <link href="./back/dist/css/tabler-flags.min.css" rel="stylesheet"/>
     <link href="./back/dist/css/tabler-payments.min.css" rel="stylesheet"/>
-    <link href="./back//dist/css/tabler-vendors.min.css" rel="stylesheet"/>
+    <link href="./back/dist/css/tabler-vendors.min.css" rel="stylesheet"/>
+    <link href={{asset("back/dist/libs/ijabo/ijabo.min.css")}} rel="stylesheet"/>
+    <link href={{asset("back/dist/libs/ijaboCropTool/ijaboCropTool.min.css")}} rel="stylesheet"/>
     @stack('stylesheets')
     @livewireStyles
     <link href="./back/dist/css/demo.min.css" rel="stylesheet"/>
@@ -33,11 +35,31 @@
       </div>
     </div>
     <!-- Libs JS -->
+    <script src="{{asset('back/dist/libs/jquery/jquery-3.6.0.min.js')}}"></script>
+    <script src="{{asset('back/dist/libs/jquery/jquery-1.7.1.min.js')}}"></script>
+    <script src="{{asset('back/dist/libs/ijabo/ijabo.min.js')}}"></script>
+    <script src="{{asset('back/dist/libs/ijaboCropTool/ijaboCropTool.min.js')}}"></script>
     <script src="./back/dist/libs/apexcharts/dist/apexcharts.min.js"></script>
     <!-- Tabler Core -->
     <script src="./back/dist/js/tabler.min.js"></script>
     @stack('scripts')
     @livewireScripts
+    <script>
+        window.addEventListener('showToastr', function(event){
+            toastr.remove();
+            if(event.detail.type === 'info'){
+                toastr.info(event.detail.message);
+            }else if(event.detail.type === 'success'){
+                toastr.success(event.detail.message)
+            }else if(event.detail.type === 'error'){
+                toastr.error(event.detail.message)
+            }else if(event.detail.type === 'warning'){
+                toastr.warning(event.detail.message)
+            }else{
+                return false;
+            }
+        })
+    </script>
     <script src="./back/dist/js/demo.min.js"></script>
   </body>
 </html>
