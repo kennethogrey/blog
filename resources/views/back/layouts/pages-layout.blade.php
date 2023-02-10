@@ -39,6 +39,7 @@
     <script src="{{asset('back/dist/libs/jquery/jquery-1.7.1.min.js')}}"></script>
     <script src="{{asset('back/dist/libs/ijabo/ijabo.min.js')}}"></script>
     <script src="{{asset('back/dist/libs/ijaboCropTool/ijaboCropTool.min.js')}}"></script>
+    <script src="{{asset('back/dist/libs/ijaboCropTool/ijaboCropTool.min.js')}}"></script>
     <script src="./back/dist/libs/apexcharts/dist/apexcharts.min.js"></script>
     <!-- Tabler Core -->
     <script src="./back/dist/js/tabler.min.js"></script>
