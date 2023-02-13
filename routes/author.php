@@ -17,5 +17,6 @@ Route::prefix('author')->name('author.')->group(function(){
         Route::view('/settings','back.pages.settings')->name('settings');
         Route::post('/change-blog-logo',[AuthorController::class,'ChangeBlogLogo'])->name('change-blog-logo');
         Route::post('/change-blog-favicon',[AuthorController::class,'ChangeBlogFavicon'])->name('change-blog-favicon');
+        Route::view('/authors','back.pages.authors')->name('authors');
     });
 });
