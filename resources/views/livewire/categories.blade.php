@@ -21,18 +21,24 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>any name</td>
-                              <td class="text-muted">
-                                4
-                              </td>
-                              <td>
-                                <div class="btn-group">
-                                    <a href="#" class='btn btn-sm btn-primary'>Edit</a> &nbsp
-                                    <a href="#" class='btn btn-sm btn-danger'> Delete</a>
-                                </div>
-                              </td>
-                            </tr>
+                            @forelse($categories as $category)
+                                <tr>
+                                    <td>{{$category->category_name}}</td>
+                                    <td class="text-muted">
+                                        4
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="#" class='btn btn-sm btn-primary'>Edit</a> &nbsp
+                                            <a href="#" class='btn btn-sm btn-danger'> Delete</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="3"><span class="text-danger">No categories found.</span></td>
+                                </tr>
+                            @endforelse
                           </tbody>
                         </table>
                     </div>
@@ -61,19 +67,25 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>any name</td>
-                              <td class="text-muted">
-                                any category
-                              </td>
-                              <td>4</td>
-                              <td>
-                                <div class="btn-group">
-                                    <a href="#" class='btn btn-sm btn-primary'>Edit</a> &nbsp
-                                    <a href="#" class='btn btn-sm btn-danger'> Delete</a>
-                                </div>
-                              </td>
-                            </tr>
+                            {{-- @forelse($categories as $category)
+                                <tr>
+                                    <td>{{$category->name}}</td> --}}
+                                    <td class="text-muted">
+                                        any category
+                                    </td>
+                                    <td>4</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="#" class='btn btn-sm btn-primary'>Edit</a> &nbsp
+                                            <a href="#" class='btn btn-sm btn-danger'> Delete</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {{-- @empty
+                                <tr>
+                                    <td colspan="3"><span class="text-danger">No categories found.</span></td>
+                                </tr>
+                            @endforelse --}}
                           </tbody>
                         </table>
                     </div>

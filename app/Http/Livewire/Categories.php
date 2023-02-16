@@ -42,6 +42,8 @@ class Categories extends Component
     
     public function render()
     {
-        return view('livewire.categories');
+        return view('livewire.categories',[
+            'categories'=>Category::orderBy('ordering','asc')->get(),
+        ]);
     }
 }
