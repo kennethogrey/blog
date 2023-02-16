@@ -19,6 +19,11 @@
     @stack('stylesheets')
     @livewireStyles
     <link href="./back/dist/css/demo.min.css" rel="stylesheet"/>
+    <style>
+        .swal2-popup{
+            font-size: .85rem;
+        }
+    </style>
   </head>
   <body >
     <div class="wrapper">

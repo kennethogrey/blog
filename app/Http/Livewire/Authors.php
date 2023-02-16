@@ -7,23 +7,39 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Nette\Utils\Random;
 use Illuminate\Support\Facades\Mail;
+use Livewire\WithPagination;
+use Illuminate\Support\Facades\File;
 
 class Authors extends Component
 {
+    use WithPagination;
     public $name,$email,$username,$author_type,$direct_publisher;
+    public $search;
+    public $perPage = 4;
+    public $selected_author_id;
+    public $blocked = 0;
+
     protected $listeners = [
         'resetForms',
+        'deleteAuthorAction',
     ];
     public function resetForms(){
         $this->name = $this->email = $this->username = $this->author_type = $this->direct_publisher = null;
         $this->resetErrorBag();
 
     }
+
+    public function mount(){
+        $this->resetPage();
+    }
+    public function updatingSearch(){
+        $this->resetPage();
+    }
     public function addAuthor(){
         $this->validate([
             'name'=>'required',
             'email'=>'required|email|unique:users,email',
-            'username'=>'require|unique:users,username|min:6|max:20',
+            'username'=>'required|unique:users,username|min:6|max:20',
             'author_type'=> 'required',
             'direct_publisher'=>'required',
         ],[
@@ -45,7 +61,7 @@ class Authors extends Component
                 'name'=>$this->name,
                 'email'=>$this->email,
                 'username'=>$this->username,
-                'password'=>$this->$default_password,
+                'password'=>$default_password,
                 'url'=> route('author.profile'),
             );
 
@@ -71,6 +87,64 @@ class Authors extends Component
             $this->showToastr('You are offline, check your connection and submit form again later','error');
         }
     }
+
+    public function editAuthor($author){
+        $this->selected_author_id = $author['id'];
+        $this->name = $author['name'];
+        $this->email = $author['email'];
+        $this->username = $author['username'];
+        $this->author_type = $author['type'];
+        $this->direct_publisher = $author['direct_publish'];
+        $this->blocked = $author['blocked'];
+        $this->dispatchBrowserEvent('showEditAuthorModal');
+    }
+
+    public function updateAuthor(){
+        $this->validate([
+            'name'=>'required',
+            'email'=>'required|email|unique:users,email,'.$this->selected_author_id,
+            'username'=>'required|min:6|max:20|unique:users,username,'.$this->selected_author_id,
+
+        ]);
+
+            if($this->selected_author_id){
+            $author = User::find($this->selected_author_id);
+            $author->update([
+                'name'=>$this->name,
+                'email'=>$this->email,
+                'username'=>$this->username,
+                'type'=>$this->author_type,
+                'blocked'=>$this->blocked,
+                'direct_publish'=>$this->direct_publisher,
+            ]);
+
+            $this->showToastr('Author detail have been successfully updated','success');
+            $this->dispatchBrowserEvent('hide_edit_author_modal');
+
+        }
+    }
+
+
+    public function deleteAuthor($author){
+        $this->dispatchBrowserEvent('deleteAuthor',[
+            'title'=>'Are you sure?',
+            'html'=>'You want to delete this author: <br><b>'.$author['name'].'</b>',
+            'id'=>$author['id'],
+        ]);
+    }
+
+    public function deleteAuthorAction($id){
+        $author = User::find($id);
+        $path = 'back/dist/img/authors/';
+        $author_picture = $author->getAttributes()['picture'];
+        $picture_full_path = $path.$author_picture;
+        if($author != null || File::exits(public_path($picture_full_path))){
+            File::delete(public_path($picture_full_path));
+        }
+        $author->delete();
+        $this->showToastr('Author has been successfully deleted','info');
+    }
+
     public function showToastr($message,$type){
         $this->dispatchBrowserEvent('showToastr',[
             'type' =>$type,
@@ -88,7 +162,8 @@ class Authors extends Component
     public function render()
     {
         return view('livewire.authors',[
-            'authors'=>User::where('id','!=',auth()->id())->get(),
+            'authors'=>User::search(trim($this->search))
+                            ->where('id','!=',auth()->id())->paginate($this->perPage),
         ]);
     }
 }
