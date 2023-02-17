@@ -7,18 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>@yield('title')</title>
     <!-- CSS files -->
-    <base href="/">
     {{-- <link rel="shortcut icon" href="{{\App\Models\Setting::find(1)->blog_favicon}}" type="image/x-icon"> --}}
     <link rel="shortcut icon" href="public/back/dist/img/logo-favicon/favicon.ico" type="image/x-icon">
-    <link href="./back/dist/css/tabler.min.css" rel="stylesheet"/>
-    <link href="./back/dist/css/tabler-flags.min.css" rel="stylesheet"/>
-    <link href="./back/dist/css/tabler-payments.min.css" rel="stylesheet"/>
-    <link href="./back/dist/css/tabler-vendors.min.css" rel="stylesheet"/>
-    <link href={{asset("back/dist/libs/ijabo/ijabo.min.css")}} rel="stylesheet"/>
-    <link href={{asset("back/dist/libs/ijaboCropTool/ijaboCropTool.min.css")}} rel="stylesheet"/>
+    <link href="/back/dist/css/tabler.min.css" rel="stylesheet"/>
+    <link href="/back/dist/css/tabler-flags.min.css" rel="stylesheet"/>
+    <link href="/back/dist/css/tabler-payments.min.css" rel="stylesheet"/>
+    <link href="/back/dist/css/tabler-vendors.min.css" rel="stylesheet"/>
+    <link href="/back/dist/libs/ijabo/ijabo.min.css" rel="stylesheet"/>
+    <link href="/back/dist/libs/ijaboCropTool/ijaboCropTool.min.css" rel="stylesheet"/>
     @stack('stylesheets')
     @livewireStyles
-    <link href="./back/dist/css/demo.min.css" rel="stylesheet"/>
+    <link href="/back/dist/css/demo.min.css" rel="stylesheet"/>
     <style>
         .swal2-popup{
             font-size: .85rem;
@@ -42,14 +41,14 @@
       </div>
     </div>
     <!-- Libs JS -->
-    <script src="{{asset('back/dist/libs/jquery/jquery-3.6.0.min.js')}}"></script>
-    <script src="{{asset('back/dist/libs/jquery/jquery-1.7.1.min.js')}}"></script>
-    <script src="{{asset('back/dist/libs/ijabo/ijabo.min.js')}}"></script>
-    <script src="{{asset('back/dist/libs/ijaboCropTool/ijaboCropTool.min.js')}}"></script>
-    <script src="{{asset('back/dist/libs/ijaboViewer/jquery.ijaboViewer.min.js')}}"></script>
+    <script src="/back/dist/libs/jquery/jquery-3.6.0.min.js"></script>
+    <script src="/back/dist/libs/jquery/jquery-1.7.1.min.js"></script>
+    <script src="/back/dist/libs/ijabo/ijabo.min.js"></script>
+    <script src="/back/dist/libs/ijaboCropTool/ijaboCropTool.min.js"></script>
+    <script src="/back/dist/libs/ijaboViewer/jquery.ijaboViewer.min.js"></script>
     <script src="./back/dist/libs/apexcharts/dist/apexcharts.min.js"></script>
     <!-- Tabler Core -->
-    <script src="./back/dist/js/tabler.min.js"></script>
+    <script src="/back/dist/js/tabler.min.js"></script>
     @stack('scripts')
     @livewireScripts
     <script>
@@ -68,6 +67,6 @@
             }
         })
     </script>
-    <script src="./back/dist/js/demo.min.js"></script>
+    <script src="/back/dist/js/demo.min.js"></script>
   </body>
 </html>

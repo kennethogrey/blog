@@ -8,6 +8,11 @@ use App\Models\User;
 use Illuminate\Support\Facades\File;
 use App\Models\Setting;
 
+use App\Models\Post;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+
 class AuthorController extends Controller
 {
     public function logout(){
@@ -80,4 +85,61 @@ class AuthorController extends Controller
             }
         }
     }
+
+    public function createPost(Request $request){
+        $request->validate([
+            'post_title'=>'required|unique:posts,post_title',
+            'post_content'=>'required',
+            'post_category'=>'required|exists:sub_categories,id',
+            'featured_image'=>'required|mimes:jpeg,jpg,png|max:1024',
+        ]);
+
+        if($request->hasFile('featured_image')){
+            $path = "images/post_images/";
+            $file = $request->file('featured_image');
+            $filename = $file->getClientOriginalName();
+            $new_filename = time().'_'.$filename;
+
+            $upload = Storage::disk('public')->put($path.$new_filename,(string) file_get_contents($file));
+
+            $post_thumbnails_path = $path.'thumbnails';
+            if(!Storage::disk('public')->exists($post_thumbnails_path)){
+                Storage::disk('public')->makeDirectory($post_thumbnails_path,0755,true,true);
+            }
+
+            //create square thumbnail
+            Image::make(storage_path('app/public/'.$path.$new_filename))
+                    ->fit(200,200)
+                    ->save(storage_path('app/public/'.$path.'thumbnails/'.'thumb_'.$new_filename));
+            
+            //create resized image
+            Image::make(storage_path('app/public/'.$path.$new_filename))
+                    ->fit(500,500)
+                    ->save(storage_path('app/public/'.'thumbnails/'.'resized_'.$new_filename));
+
+            if($upload){
+                $post = new Post();
+                $post->author_id = auth()->id();
+                $post->category_id = $request->post_category;
+                $post->post_title = $request->post_title;
+                // $post->post_slug = Str::slug($request->post_title);
+                $post->post_content = $request->post_content;
+                $post->featured_image = $new_filename;
+                $saved = $post->save();
+                if($saved){
+                    return redirect()->route('author.posts.add-post')->with('success','New post has been successfully created.');
+
+                }else{
+                    return redirect()->route('author.posts.add-post')->with('fail','Something went wrong while saving post data');
+
+                }
+
+            }else{
+                return redirect()->route('author.posts.add-post')->with('fail','Something went wrong while uploading featured image');
+
+            }
+
+        }
+    }
+
 }
