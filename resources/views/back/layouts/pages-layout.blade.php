@@ -42,9 +42,8 @@
     </div>
     <!-- Libs JS -->
     <script src="/back/dist/libs/jquery/jquery-3.6.0.min.js"></script>
-    <script src="/back/dist/libs/jquery/jquery-1.7.1.min.js"></script>
     <script src="/back/dist/libs/ijabo/ijabo.min.js"></script>
-    <script src="/back/dist/libs/ijaboCropTool/ijaboCropTool.min.js"></script>
+    <script src="/back/dist/libs/ijaboCropTool/ijaboCropTool.min.js"></scrip>
     <script src="/back/dist/libs/ijaboViewer/jquery.ijaboViewer.min.js"></script>
     <script src="./back/dist/libs/apexcharts/dist/apexcharts.min.js"></script>
     <!-- Tabler Core -->
