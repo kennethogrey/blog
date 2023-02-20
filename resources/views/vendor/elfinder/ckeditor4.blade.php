@@ -5,9 +5,9 @@
         <title>Blog Filemanager</title>
 
         <!-- jQuery and jQuery UI (REQUIRED) -->
-        <link rel="stylesheet" href="{{asset('/jquery-ui-1.13.2/jquery-ui.min.css')}}" />
-        <script src="{{asset('/jquery-ui-1.13.2/external/jquery/jquery.js')}}"></script>
-        <script src="{{asset('/jquery-ui-1.13.2/jquery-ui.min.js')}}"></script>
+        <link rel="stylesheet" href="/jquery-ui-1.13.2/jquery-ui.min.css" />
+        <script src="/jquery-ui-1.13.2/external/jquery/jquery.js"></script>
+        <script src="/jquery-ui-1.13.2/jquery-ui.min.js"></script>
 
         <!-- elFinder CSS (REQUIRED) -->
         <link rel="stylesheet" type="text/css" href="{{ asset($dir.'/css/elfinder.min.css') }}">

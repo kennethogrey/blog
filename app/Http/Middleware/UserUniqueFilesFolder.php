@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
-
-
 class UserUniqueFilesFolder
 {
     /**
@@ -22,12 +20,13 @@ class UserUniqueFilesFolder
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check()){
+        if( Auth::check() ){
+            //Unique folder name => my1files
             $folder_name = 'my'.Auth::user()->id.'files';
-            if(!Storage::disk('public')->exists($folder_name)){
-                Storage::disk('public')->makeDirectory($folder_name,0755,true,true);
+            if( !Storage::disk('public')->exists($folder_name) ){
+                Storage::disk('public')->makeDirectory($folder_name, 0755, true, true);
             }
-            Config::set('elfinder.dir', ["storage/$folder_name"]);
+            Config::set('elfinder.dir',["storage/$folder_name"]);
         }
         return $next($request);
     }

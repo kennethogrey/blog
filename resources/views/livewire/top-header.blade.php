@@ -88,7 +88,7 @@
                     <a class="dropdown-item" href="{{route('author.posts.add-post')}}" >
                       Add new
                     </a>
-                    <a class="dropdown-item" href="./gallery.html" >
+                    <a class="dropdown-item" href="{{route('author.posts.all_posts')}}" >
                       All Posts
                     </a>
                   </div>
