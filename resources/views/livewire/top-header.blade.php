@@ -93,6 +93,7 @@
                     </a>
                   </div>
                 </li>
+                @if(auth()->user()->type == 1)
                 <li class="nav-item active dropdown">
                   <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
                     <span class="nav-link-title">
@@ -109,6 +110,7 @@
                     </div>
                   </div>
                 </li>
+                @endif
                 <li class="nav-item">
                   <a class="nav-link" href="./docs/index.html" >
                     <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/file-text -->

@@ -148,7 +148,7 @@ class AuthorController extends Controller
                     toastr()->success('New post has been successfully created.');
                     return back();
                  }else{
-                    toastr()->success('Something went wrong ins saving post data.');
+                    toastr()->error('Something went wrong in saving post data.');
                     return back();
                  }
             }else{
@@ -157,6 +157,46 @@ class AuthorController extends Controller
             }
         }
     }
-  
+
+    public function editPost(Request $request){
+        if( !request()->post_id ){
+            return abort(404);
+        }else{
+            $post = Post::find(request()->post_id);
+            $data = [
+                'post'=>$post,
+                'pageTitle'=>'Edit Post',
+            ];
+            return view('back.pages.edit_post',$data);
+        }
+    }
+
+    public function updatePost(Request $request){
+        if($request->hasFile('featured_image')){
+
+        }else{
+            $request->validate([
+                'post_title'=>'required|unique:posts,post_title,',$request->post_title,
+                'post_content'=>'required',
+                'post_category'=>'required|exists:sub_categories,id'
+            ]);
+            $post = Post::find($request->post_id);
+            $post->category_id = $request->post_category;
+            $post->post_content = $request->post_content;
+            $post->post_title = $request->post_title;
+            $saved = $post->save();
+
+            if($saved){
+                toastr()->success('Post has been successfully updated.');
+                return back();
+             }else{
+                toastr()->error('Something went wrong.');
+                return back();
+             }
+
+        }
+
+    }
+
 }
 
