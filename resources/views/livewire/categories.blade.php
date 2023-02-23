@@ -28,7 +28,7 @@
                                     <td>
                                         <div class="btn-group">
                                             <a href="#" class='btn btn-sm btn-primary' wire:click.prevent='editCategory({{$category->id}})'>Edit</a> &nbsp
-                                            <a href="#" class='btn btn-sm btn-danger'> Delete</a>
+                                            <a href="#" wire:click.prevent="deleteCategory({{$category->id}})" class='btn btn-sm btn-danger'> Delete</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -68,12 +68,12 @@
                             @forelse($subcategories as $subcategory)
                                 <tr>
                                     <td>{{$subcategory->subcategory_name}}</td>
-                                    <td class="text-muted">{{$subcategory->parentCategory->category_name}}</td>
+                                    <td class="text-muted">{{$subcategory->parent_category != 0 ? $subcategory->parentCategory->category_name : ' - '}}</td>
                                     <td>{{$subcategory->posts->count()}}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href="#" class='btn btn-sm btn-primary' wire:click.prevent='editSubCategory({{$subcategory->id}})'>Edit</a> &nbsp
-                                            <a href="#" class='btn btn-sm btn-danger'> Delete</a>
+                                            <a href="" class='btn btn-sm btn-primary' wire:click.prevent='editSubCategory({{$subcategory->id}})'>Edit</a> &nbsp
+                                            <a href="" wire:click.prevent='deleteSubCategory({{$subcategory->id}})' class='btn btn-sm btn-danger'> Delete</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -142,9 +142,7 @@
                 <div class="mb-3">
                     <div class="form-label">Parent Category</div>
                     <select class="form-select" wire:model='parent_category'>
-                        @if (!$updateSubCategoryMode)
-                            <option value="">No Selected</option>
-                        @endif
+                        <option value="0">---Uncategorized---</option>
                         @foreach (\App\Models\Category::all() as $category)
                             <option value="{{$category->id}}">{{$category->category_name}}</option>
                         @endforeach
