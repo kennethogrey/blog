@@ -50,6 +50,10 @@
                   <div class="image_holder mb-2" style="max-width: 250px">
                         <img src="" alt="" class="img-thumbnail" id="image-previewer" data-ijabo-default-img='storage/images/post_images/thumbnails/resized_{{$post->featured_image}}'>
                   </div>
+                  <div class="mb-3">
+                    <label class="form-label">Post tags</label>
+                    <input type="text" class="form-control" name="post_tags" value="{{$post->post_tags}}">
+                  </div>
                   <button type="submit" class="btn btn-primary">Update post</button>
             </div>
            </div>

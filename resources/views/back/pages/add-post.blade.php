@@ -48,6 +48,10 @@
                   <div class="image_holder mb-2" style="max-width: 250px">
                         <img src="" alt="" class="img-thumbnail" id="image-previewer" data-ijabo-default-img=''>
                   </div>
+                  <div class="mb-3">
+                    <label class="form-label">Post tags</label>
+                    <input type="text" class="form-control" name="post_tags">
+                  </div>
                   <button type="submit" class="btn btn-primary">Save post</button>
             </div>
            </div>
@@ -98,6 +102,7 @@
                        $(form)[0].reset();
                        $('div.image_holder').find('img').attr('src','');
                        CKEDITOR.instances.post_content.setData('');
+                       $('input[name="post_tags"]').amsifySuggestags();
                        toastr.success(data.msg);
                     }else{
                         toastr.error(data.msg);

@@ -20,9 +20,9 @@
                               <th class="w-1"></th>
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody id="sortable_category">
                             @forelse($categories as $category)
-                                <tr>
+                                <tr data-index="{{$category->id}}" data-ordering="{{$category->ordering}}">
                                     <td>{{$category->category_name}}</td>
                                     <td class="text-muted">{{$category->subcategories->count()}}</td>
                                     <td>
@@ -64,9 +64,9 @@
                               <th class="w-1"></th>
                             </tr>
                           </thead>
-                          <tbody>
+                          <tbody id="sortable_subcategory">
                             @forelse($subcategories as $subcategory)
-                                <tr>
+                                <tr data-index="{{$subcategory->id}}" data-ordering="{{$subcategory->ordering}}">
                                     <td>{{$subcategory->subcategory_name}}</td>
                                     <td class="text-muted">{{$subcategory->parent_category != 0 ? $subcategory->parentCategory->category_name : ' - '}}</td>
                                     <td>{{$subcategory->posts->count()}}</td>

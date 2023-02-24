@@ -22,13 +22,13 @@
                     </li>
                     @foreach(\App\Models\Category::whereHas('subcategories',function($q){
                         $q->whereHas('posts');
-                    })->get() as $category)
+                    })->orderBy('ordering','asc')->get() as $category)
                         <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{$category->category_name}}
                             </a>
-                            <div class="dropdown-menu"> 
-                                @foreach(\App\Models\SubCategory::where('parent_category',$category->id)->whereHas('posts')->get() as $subcategory)
+                            <div class="dropdown-menu">
+                                @foreach(\App\Models\SubCategory::where('parent_category',$category->id)->whereHas('posts')->orderBy('ordering','asc')->get() as $subcategory)
                                     <a class="dropdown-item" href="">{{$subcategory->subcategory_name}}</a>
                                 @endforeach
                             </div>
@@ -45,5 +45,3 @@
         </nav>
     </div>
 </header>
-
-{{blogInfo()}}

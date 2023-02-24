@@ -15,6 +15,10 @@
     <link href="/back/dist/css/tabler-vendors.min.css" rel="stylesheet"/>
     <link href="/back/dist/libs/ijabo/ijabo.min.css" rel="stylesheet"/>
     <link href="/back/dist/libs/ijaboCropTool/ijaboCropTool.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/jquery-ui-1.13.2/jquery-ui.min.css">
+    <link rel="stylesheet" href="/jquery-ui-1.13.2/jquery-ui.structure.css">
+    <link rel="stylesheet" href="/jquery-ui-1.13.2/jquery-ui.theme.min.css">
+    <link rel="stylesheet" href="/amsify/amsify.suggestags.css">
     @stack('stylesheets')
     @livewireStyles
     <link href="/back/dist/css/demo.min.css" rel="stylesheet"/>
@@ -45,12 +49,17 @@
     <script src="/back/dist/libs/ijabo/ijabo.min.js"></script>
     <script src="/back/dist/libs/ijaboCropTool/ijaboCropTool.min.js"></scrip>
     <script src="/back/dist/libs/ijaboViewer/jquery.ijaboViewer.min.js"></script>
-    <script src="./back/dist/libs/apexcharts/dist/apexcharts.min.js"></script>
+    <script src="/back/dist/libs/apexcharts/dist/apexcharts.min.js"></script>
+    <script src="/jquery-ui-1.13.2/jquery-ui.min.js"></script>
+    <script src="/amsify/jquery.amsify.suggestags.js"></script>
     <!-- Tabler Core -->
     <script src="/back/dist/js/tabler.min.js"></script>
     @stack('scripts')
     @livewireScripts
     <script>
+        
+        $('input[name="post_tags"]').amsifySuggestags();
+
         window.addEventListener('showToastr', function(event){
             toastr.remove();
             if(event.detail.type === 'info'){

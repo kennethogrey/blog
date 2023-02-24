@@ -24,6 +24,8 @@ class Categories extends Component
         'resetModalForm',
         'deleteCategoryAction',
         'deleteSubCategoryAction',
+        'updateCategoryOrdering',
+        'updatedSubCategoryOrdering',
     ];
 
     public function resetModalForm(){
@@ -180,6 +182,28 @@ class Categories extends Component
         }else{
             $subcategory->delete();
             $this->showToastr('Subcategory has been deleted successfully.','info');
+        }
+    }
+
+    public function updateCategoryOrdering($positions){
+        foreach($positions as $position){
+            $index = $position[0];
+            $newPosition = $position[1];
+            Category::where('id',$index)->update([
+                'ordering'=>$newPosition
+            ]);
+            $this->showToastr('Category orderings have been successfully updated','success');
+        }
+    }
+
+    public function updatedSubCategoryOrdering($positions){
+        foreach($positions as $position){
+            $index = $position[0];
+            $newPosition = $position[1];
+            SubCategory::where('id',$index)->update([
+                'ordering'=>$newPosition
+            ]);
+            $this->showToastr('SubCategory orderings have been successfully updated','success');
         }
     }
 
