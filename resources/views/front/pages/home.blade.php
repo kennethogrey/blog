@@ -16,9 +16,6 @@
 <meta name="twitter:title" property="og:title" itemprop="name" content="{{blogInfo()->blog_name}}">
 <meta name="twitter:description" property="og:description" itemprop="description" content="{{blogInfo()->description}}">
 <meta name="twitter:image" content="{{blogInfo()->blog_logo}}">
-
-
-
 @endsection
 @section('content')
 <div class="row no-gutters-lg">
