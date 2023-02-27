@@ -43,6 +43,19 @@
                 <div class="content text-left">
                     <p>{!! $post->post_content !!}</p>
                 </div>
+               @if ($post->post_tags)
+               @php
+                   $tagsString = $post->post_tags;
+                   $tagsArray = explode(',',$tagsString);
+               @endphp
+                    <div class="tags-container mt-4">
+                        <ul class="post-meta">
+                            @foreach($tagsArray as $tag)
+                                <li><a href="{{route('tag_posts',$tag)}}">#{{$tag}}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+               @endif
             </article>
            @if (count($related_posts) > 0)
                 <div class="widget-list mt-5">
@@ -58,6 +71,25 @@
                     @endforeach
                 </div>
             @endif
+            <div class="mt-5">
+                <div id="disqus_thread"></div>
+                <script>
+                    /**
+                    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                    var disqus_config = function () {
+                    this.page.url = {{route('read_post',$post->post_slug)}};  // Replace PAGE_URL with your page's canonical URL variable
+                    this.page.identifier = {{$post->id}}; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                    };
+                    (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://ogrey.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            </div>
         </div>
         <div class="col-lg-4">
             <div class="widget-blocks">
@@ -94,21 +126,8 @@
                         </div>
                         </div>
                     </div>
-                  @if(categories())
-                    <div class="col-lg-12 col-md-6">
-                        <div class="widget">
-                            <h2 class="section-title mb-3">Categories</h2>
-                            <div class="widget-body">
-                                <ul class="widget-list">
-                                    @foreach(categories() as $item)
-                                        <li><a href="{{route('category_posts',$item->slug)}}">{{Str::ucfirst($item->subcategory_name)}}
-                                            <span class="ml-auto">({{$item->posts->count()}})</span></a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                @endif
+                    <x-categories-list/>
+                    <x-tags-list/>
                 </div>
             </div>
         </div>

@@ -92,6 +92,7 @@
                         </div>
                     </div>
                 @endif
+                <x-tags-list/>
                 </div>
             </div>
         </div>

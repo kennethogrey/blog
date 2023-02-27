@@ -6,7 +6,7 @@
           </button>
           <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
             <a href="{{route('author.home')}}">
-              <img src="/back/dist/img/logo-favicon/logo.png" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+              <img src="{{ \App\Models\Setting::find(1)->blog_logo }}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
             </a>
           </h1>
           <div class="navbar-nav flex-row order-md-last">
@@ -56,12 +56,13 @@
             <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="./index.html" >
+                  <a class="nav-link" href="{{route('author.home')}}" >
                     <span class="nav-link-title">
                       Home
                     </span>
                   </a>
                 </li>
+                @if (auth()->user()->type == 1)
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('author.categories')}}" >
                       <span class="nav-link-title">
@@ -69,6 +70,7 @@
                       </span>
                     </a>
                 </li>
+                @endif
                 @if (auth()->user()->type == 1)
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('author.authors')}}" >

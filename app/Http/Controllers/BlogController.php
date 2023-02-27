@@ -68,7 +68,7 @@ class BlogController extends Controller
                         ->with('subcategory')
                         ->with('author')
                         ->first();
-            
+
             $post_tags = explode(',',$post->post_tags);
             $related_posts = Post::where('id','!=',$post->id)
                                     ->where(function($query) use ($post_tags,$post){
@@ -86,6 +86,24 @@ class BlogController extends Controller
                 'related_posts'=>$related_posts,
             ];
             return view('front.pages.single_post',$data);
+        }
+    }
+
+    public function tagPosts(Request $request,$tag){
+        $posts = Post::where('post_tags','LIKE','%'.$tag.'%')
+                    ->with('subcategory')
+                    ->with('author')
+                    ->orderBy('created_at','desc')
+                    ->paginate(6);
+        if(!$posts){
+            return abort(404);
+        }else{
+            $data = [
+                'pageTitle'=>'#'.$tag,
+                'posts'=>$posts,
+            ];
+
+            return view('front.pages.tag_posts',$data);
         }
     }
 }

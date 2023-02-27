@@ -1,5 +1,5 @@
 @extends('back.layouts.pages-layout')
-@section('pageTitle', isset($pageTitle) ? $pageTitle : 'Add new post')
+@section('title', isset($title) ? $title : 'Add new post')
 @section('content')
   
 <div class="page-header d-print-none">

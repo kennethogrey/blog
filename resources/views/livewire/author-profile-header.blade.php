@@ -1,4 +1,5 @@
 <div>
+
     <div class="page-header">
         <div class="row align-items-center">
           <div class="col-auto">
@@ -11,24 +12,21 @@
                 <div class="col-auto">
                   <!-- Download SVG icon from http://tabler-icons.io/i/building-skyscraper -->
                   <!-- SVG icon code -->
-                  <a href="#" class="text-reset">@ {{$author->username}} | {{ $author->authorType->name }}</a>
+                  <a href="#" class="text-reset">@ {{ $author->username }} | {{ $author->authorType->name }}</a>
                 </div>
+
               </div>
             </div>
           </div>
-          <div class="col-auto d-md-flex">
-            <input type="file" name="file" id="changeAuthorProfileFile" class='d-none'>
-            <!-- Download SVG icon from http://tabler-icons.io/i/message -->
-            <!-- SVG icon code -->
-            <a href="#" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('changeAuthorProfileFile').click();">
-                Change Picture
-              </a>
+          <div class="col-auto  d-md-flex">
+            <input type="file" name="file" id="changeAuthorPictureFile" class="d-none" onchange="this.dispatchEvent(new InputEvent('input'))">
+            <a href="#" class="btn btn-primary" onclick="event.preventDefault();document.getElementById('changeAuthorPictureFile').click();">
+              <!-- Download SVG icon from http://tabler-icons.io/i/message -->
+              <!-- SVG icon code -->
+              Change picture
+            </a>
           </div>
-          <script>
-            document.getElementById('changeAuthorProfileFile').addEventListener('change', function(event) {
-              this.dispatchEvent(new InputEvent('input'));
-            });
-          </script>
         </div>
-    </div>
+      </div>
+
 </div>

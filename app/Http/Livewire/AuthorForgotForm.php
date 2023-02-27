@@ -44,11 +44,22 @@ class AuthorForgotForm extends Component
             'name'=>$user->name,
         );
 
-        Mail::send('forgot-email-template',$data,function($message) use ($user){
-            $message->from('noreply@example.com','Blog');
-            $message->to($user->email, $user->name)
-                    ->subject('Reset Password');
-        });
+        // Mail::send('forgot-email-template',$data,function($message) use ($user){
+        //     $message->from('noreply@example.com','Blog');
+        //     $message->to($user->email, $user->name)
+        //             ->subject('Reset Password');
+        // });
+
+        $mail_body = view('forgot-email-template',$data)->render();
+        $mailConfig = array(
+            'mail_from_email' => env('EMAIL_FROM_ADDRESS'),
+            'mail_from_name' => env('EMAIL_FROM_ADDRESS'),
+            'mail_recipient_address' => $user->email,
+            'mail_recipient_name' => $user->name,
+            'mail_subject' => 'Reset password',
+            'mail_body' => $mail_body,
+        );
+        sendMail($mailConfig);
 
         $this->email = null;
         session()->flash('success','We have e-mailed your password reset link');

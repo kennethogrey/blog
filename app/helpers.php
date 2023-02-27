@@ -4,6 +4,8 @@ use App\Models\Post;
 use App\Models\SubCategory;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 if(!function_exists('blogInfo')){
     function blogInfo(){
@@ -96,7 +98,7 @@ if(!function_exists('recommended_posts')){
                     ->with('subcategory')
                     ->limit(4)
                     ->inRandomOrder()
-                    ->get();    
+                    ->get();
     }
 }
 
@@ -125,4 +127,45 @@ if(!function_exists('latest_sidebar_posts')){
     }
 }
 
+/**
+ * function that will help us send emails using PHPMailer
+ */
+
+if(!function_exists('sendMail')){
+    function sendMail($mailConfig){
+        require 'PHPMailer/src/Exception.php';
+        require 'PHPMailer/src/PHPMailer.php';
+        require 'PHPMailer/src/SMTP.php';
+
+        $mail = new PHPMailer(true);
+        $mail->SMTPDebug = 0;
+        $mail->isSMTP();
+        $mail->Host = env('EMAIL_HOST');
+        $mail->SMTPAuth = true;
+        $mail->Username = env('EMAIL_USERNAME');
+        $mail->Password = env('EMAIL_PASSWORD');
+        $mail->SMTPSecure = env('EMAIL_ENCRYPTION');
+        $mail->Port = env('EMAIL_PORT');
+        $mail->setFrom($mailConfig['mail_from_email'],$mailConfig['mail_from_name']);
+        $mail->addAddress($mailConfig['mail_recipient_email'],$mailConfig['mail_recipient_name']);
+        $mail->isHTML(true);
+        $mail->Subject = $mailConfig['mail_subject'];
+        $mail->Body = $mailConfig['mail_body'];
+
+        if($mail->send()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+/**
+ * all tags
+ */
+if(!function_exists('all_tags')){
+    function all_tags(){
+        return Post::where('post_tags','!=',null)->distinct()->pluck('post_tags')->join(',');
+    }
+}
+}
 ?>

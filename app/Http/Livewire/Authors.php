@@ -69,11 +69,22 @@ class Authors extends Component
             $author_name = $this->name;
 
             if($saved){
-                Mail::send('new-author-email-template',$data,function($message) use ($author_email,$author_name){
-                    $message->from('ogreytesting@gmail.com','Blog');
-                    $message->to($author_email,$author_name)
-                            ->subject('Account creation');
-                });
+                // Mail::send('new-author-email-template',$data,function($message) use ($author_email,$author_name){
+                //     $message->from('ogreytesting@gmail.com','Blog');
+                //     $message->to($author_email,$author_name)
+                //             ->subject('Account creation');
+                // });
+
+                $mail_body = view('new-author-email-template',$data)->render();
+                $mailConfig = array(
+                    'mail_from_email' => env('EMAIL_FROM_ADDRESS'),
+                    'mail_from_name' => env('EMAIL_FROM_ADDRESS'),
+                    'mail_recipient_address' => $author->email,
+                    'mail_recipient_name' => $author->name,
+                    'mail_subject' => 'Account creation',
+                    'mail_body' => $mail_body,
+                );
+                sendMail($mailConfig);
 
                 $this->showToastr('new author has been added to the blog successfully.','success');
                 $this->name = $this->email = $this->username = $this->author_type = $this->direct_publisher = null;
