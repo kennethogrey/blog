@@ -1,12 +1,8 @@
 <header class="navigation">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light px-0">
-            {{-- <a class="navbar-brand order-1 py-0" href="/">
-                <img loading="prelaod" decoding="async" class="img-fluid" src="{{asset('/back/dist/img/logo-favicon/logo.png')}}"
-                    alt="{{blogInfo()->blog_name}}" height="50" sytle='max-width:100px'>
-            </a> --}}
             <a class="navbar-brand order-1 py-0" href="/">
-                <img loading="prelaod" decoding="async" src="/back/dist/img/logo-favicon/logo.png" width="100" height="20" alt="{{blogInfo()->blog_name}}" class="navbar-brand-image">
+                <img loading="prelaod" decoding="async" src="{{blogInfo()->blog_logo}}" width="100" height="20" alt="{{blogInfo()->blog_name}}" class="navbar-brand-image">
             </a>
             <div class="navbar-actions order-3 ml-0 ml-md-4">
                 <button aria-label="navbar toggler" class="navbar-toggler border-0" type="button"

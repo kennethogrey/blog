@@ -85,7 +85,7 @@
     <div class="col-lg-4">
 <div class="widget-blocks">
 <div class="row">
-  <div class="col-lg-12">
+  {{-- <div class="col-lg-12">
     <div class="widget">
       <div class="widget-body">
         <img loading="lazy" decoding="async" src="/front/images/author.jpg" alt="About Me" class="w-100 author-thumb-sm d-block">
@@ -94,7 +94,7 @@
           More</a>
       </div>
     </div>
-  </div>
+  </div> --}}
   @if(recommended_posts())
     <div class="col-lg-12 col-md-6">
         <div class="widget">

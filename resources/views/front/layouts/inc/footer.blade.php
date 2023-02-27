@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-10 mx-auto text-center">
                 <a class="navbar-brand order-1 py-0" href="/">
-                    <img loading="prelaod" decoding="async" src="/back/dist/img/logo-favicon/logo.png" width="100" height="20" alt="{{blogInfo()->blog_name}}" class="navbar-brand-image">
+                    <img loading="prelaod" decoding="async" src="{{blogInfo()->blog_logo}}" width="100" height="20" alt="{{blogInfo()->blog_name}}" class="navbar-brand-image">
                 </a>
                 <ul class="p-0 d-flex navbar-footer mb-0 list-unstyled">
                     <li class="nav-item my-0"> <a class="nav-link" href="about.html">About</a></li>

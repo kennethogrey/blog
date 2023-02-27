@@ -94,7 +94,7 @@
         <div class="col-lg-4">
             <div class="widget-blocks">
                 <div class="row">
-                    <div class="col-lg-12">
+                    {{-- <div class="col-lg-12">
                         <div class="widget">
                             <div class="widget-body">
                                 <img loading="lazy" decoding="async" src="/front/images/author.jpg" alt="About Me"
@@ -106,7 +106,7 @@
                                     More</a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-lg-12 col-md-6">
                         <div class="widget">
                         <h2 class="section-title mb-3">Latest Posts</h2>

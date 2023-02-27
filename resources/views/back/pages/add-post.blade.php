@@ -1,7 +1,7 @@
 @extends('back.layouts.pages-layout')
 @section('title', isset($title) ? $title : 'Add new post')
 @section('content')
-  
+
 <div class="page-header d-print-none">
     <div class="row align-items-center">
       <div class="col">
@@ -66,7 +66,7 @@
 <script>
     $(function(){
         $('input[type="file"][name="featured_image"]').ijaboViewer({
-            preview:'#image-preveiwer',
+            preview:'#image-previewer',
             imageShape:'rectangular',
             allowedExtensions:['jpg','jpeg','png'],
             onErrorShape:function(message,element){
@@ -74,10 +74,10 @@
             },
             onInvalidType:function(message,element){
                 alert(message);
-            },
+            }
         });
 
-        
+
         $('form#addPostForm').on('submit', function(e){
             e.preventDefault();
             toastr.remove();
@@ -119,5 +119,5 @@
 
     });
 </script>
-    
+
 @endpush

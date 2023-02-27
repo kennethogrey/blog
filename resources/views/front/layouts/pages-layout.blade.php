@@ -6,8 +6,8 @@
     <title>@yield('pageTitle')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
     @yield('meta_tags')
-    <link rel="shortcut icon" href="/back/dist/img/logo-favicon/logo.png" type="image/x-icon">
-    <link rel="icon" href="/back/dist/img/logo-favicon/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{blogInfo()->blog_favicon}}" type="image/x-icon">
+    <link rel="icon" href="{{blogInfo()->blog_favicon}}" type="image/x-icon">
 
     <!-- theme meta -->
     <meta name="theme-name" content="reporter" />
