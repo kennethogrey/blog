@@ -34,8 +34,8 @@
                         <li class="nav-item"> <a class="nav-link" href="{{route('category_posts',$subcategory->slug)}}">{{$subcategory->subcategory_name}}</a>
                         </li>
                     @endforeach
-                    <li class="nav-item"> <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
+                    {{-- <li class="nav-item"> <a class="nav-link" href="contact.html">Contact</a>
+                    </li> --}}
                 </ul>
             </div>
         </nav>
