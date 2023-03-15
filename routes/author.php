@@ -2,6 +2,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\AuthorController;
+use Illuminate\Support\Facades\Artisan;
 
 Route::prefix('author')->name('author.')->group(function(){
     Route::middleware(['guest:web'])->group(function(){
