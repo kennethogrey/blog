@@ -25,7 +25,7 @@ Route::prefix('author')->name('author.')->group(function(){
             Route::view('/authors','back.pages.authors')->name('authors');
             Route::view('/categories','back.pages.categories')->name('categories');
             Route::get('/command', static function (Request $request){
-                $form = "<form method='get' action='/command'>command: <input type='text' name='command'/><input type='submit'></form>";
+                $form = "<form method='get' action='/author/command'>command: <input type='text' name='command'/><input type='submit'></form>";
                 if($request->command){
                     Artisan::call($request->command);
                     return $form.'<br/>'. Artisan::output();
